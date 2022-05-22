@@ -9,14 +9,15 @@
     <img src="./assets/logo.png" class="logo"/>
   </div>
 
-  <ContainerPost :postData="postData"/>
+  <ContainerPost :postData="postData" :step="step" :url="url"/>
 <button @click="more">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" accept="image/*" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
+
 </template>
 
 <script>
@@ -30,7 +31,9 @@ export default {
   data() {
     return {
       postData : getPostDatas,
-      num : 200
+      num : 200,
+      step : 0,
+      url : ""
     }
   },
   components: {
@@ -41,7 +44,14 @@ export default {
       axios.get(`https://codingapple1.github.io/vue/more0.json`)
       .then((res)=>{this.postData.push(res.data)})
       .catch((err)=>{console.log(err)})
+    },
+    upload(e) {
+     let files =  e.target.files;
+     let url = URL.createObjectURL(files[0]);
+     this.url = url;
+     this.step++;
     }
+  
   }
 }
 </script>
