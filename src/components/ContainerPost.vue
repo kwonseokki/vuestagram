@@ -17,9 +17,9 @@
 
 <!-- 글작성페이지 -->
 <div v-if="step == 2">
-  <div  class="upload-image"></div>
+  <div  class="upload-image" :style="`background:url(${url}) center center`"></div>
   <div class="write">
-    <textarea class="write-box">write!</textarea>
+    <textarea class="write-box" @input="posting"></textarea>
   </div>
 </div>
 </template>
@@ -30,7 +30,7 @@ export default {
     name : "ContainerPost",
     data (){
         return{ 
-           
+          
         }
     },
     components : {
@@ -40,7 +40,15 @@ export default {
       postData:Object,
       step : Number,
       url : String
+    },
+    
+    methods : {
+     posting(e) {
+       let posting = e.target.value;
+       this.$emit("posting", posting)
+     }
     }
+    
 }
 </script>
 

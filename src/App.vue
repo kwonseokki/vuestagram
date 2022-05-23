@@ -4,12 +4,13 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step==1" @click="step++;">Next</li>
+      <li v-if="step==2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo"/>
   </div>
 
-  <ContainerPost :postData="postData" :step="step" :url="url"/>
+  <ContainerPost :postData="postData" :step="step" :url="url" @posting="getPosting"/>
 <button @click="more">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
@@ -33,7 +34,8 @@ export default {
       postData : getPostDatas,
       num : 200,
       step : 0,
-      url : ""
+      url : "",
+      content: ""
     }
   },
   components: {
@@ -50,6 +52,23 @@ export default {
      let url = URL.createObjectURL(files[0]);
      this.url = url;
      this.step++;
+    },
+    publish() {
+      let myPost = {
+        name: "Kim Hyun",
+      userImage: "https://placeimg.com/100/100/arch",
+      postImage: this.url,
+      likes: 36,
+      date: "May 15",
+      liked: false,
+      content: this.content,
+      filter: "perpetua"
+      };
+      this.postData.unshift(myPost);
+      this.step=0;
+    },
+    getPosting : function(e){
+      this.content = e;
     }
   
   }
