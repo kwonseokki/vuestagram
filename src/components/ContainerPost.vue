@@ -7,11 +7,8 @@
 <div  v-if="step == 1">
   <div class="upload-image" :style="`background:url(${url}) center center`"></div>
   <div class="filters">
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
+    <FilterBox :url="url" v-for="(x,y) in filters" :key="y"></FilterBox>
+    
   </div>
 </div>
 
@@ -26,15 +23,19 @@
 
 <script>
 import DoPost from './DoPost.vue'
+import FilterBox from './FilterBox.vue'
 export default {
     name : "ContainerPost",
     data (){
         return{ 
-          
+          filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+                    "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+                    "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
         }
     },
     components : {
         DoPost,
+        FilterBox
     },
     props : {
       postData:Object,
