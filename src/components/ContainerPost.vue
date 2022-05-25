@@ -1,20 +1,23 @@
 <template>
   <div v-if="step==0">
-  <DoPost v-for="(x,y) in postData" :key="y" :postData="postData[y]"></DoPost>
+  <DoPost v-for="(x,y) in postData" :key="y" :postData="postData[y]" :filterName="filterName"></DoPost>
+  {{filterName}}
 </div>
 
 <!-- 필터선택페이지 -->
 <div  v-if="step == 1">
-  <div class="upload-image" :style="`background:url(${url}) center center`"></div>
+  <div :class="filterName +' upload-image'" :style="`background:url(${url}) center center`"></div>
   <div class="filters">
-    <FilterBox :url="url" v-for="(x,y) in filters" :key="y"></FilterBox>
-    
+    <FilterBox :url="url" v-for="(x,y) in filters" :key="y" :filter="filters[y]">
+      <template v-slot:a>{{filters[y]}}</template>
+      
+    </FilterBox>
   </div>
 </div>
 
 <!-- 글작성페이지 -->
 <div v-if="step == 2">
-  <div  class="upload-image" :style="`background:url(${url}) center center`"></div>
+  <div  :class="filterName +' upload-image'" :style="`background:url(${url}) center center`"></div>
   <div class="write">
     <textarea class="write-box" @input="posting"></textarea>
   </div>
@@ -40,14 +43,15 @@ export default {
     props : {
       postData:Object,
       step : Number,
-      url : String
+      url : String,
+      filterName : String
     },
     
     methods : {
      posting(e) {
        let posting = e.target.value;
        this.$emit("posting", posting)
-     }
+     },
     }
     
 }

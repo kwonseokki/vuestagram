@@ -10,8 +10,9 @@
     <img src="./assets/logo.png" class="logo"/>
   </div>
 
-  <ContainerPost :postData="postData" :step="step" :url="url" @posting="getPosting"/>
+  <ContainerPost :postData="postData" :step="step" :url="url" @posting="getPosting" :filterName="filterName"/>
 <button @click="more">더보기</button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" accept="image/*" id="file" class="inputfile" />
@@ -35,8 +36,14 @@ export default {
       num : 200,
       step : 0,
       url : "",
-      content: ""
+      content: "",
+      filterName : ""
     }
+  },
+  mounted() {
+    this.emitter.on("fire", (filterName)=>{
+      this.filterName = filterName;
+    })
   },
   components: {
    ContainerPost
@@ -51,6 +58,7 @@ export default {
      let files =  e.target.files;
      let url = URL.createObjectURL(files[0]);
      this.url = url;
+     console.log(url)
      this.step++;
     },
     publish() {
@@ -62,7 +70,7 @@ export default {
       date: "May 15",
       liked: false,
       content: this.content,
-      filter: "perpetua"
+      filter: this.filterName
       };
       this.postData.unshift(myPost);
       this.step=0;

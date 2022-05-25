@@ -4,10 +4,10 @@
     <div class="post-header">
       <div class="profile" :style="{background:`url(${postData.userImage})`}">
       </div>
+     
       <span class="profile-name">{{postData.name}}</span>
     </div>
-    <div class="post-body" :style="{background : `url(${postData.postImage})`}">
-     
+    <div :class="'post-body '+ postData.filter" :style="{background :`url(${postData.postImage}) center center`}">
     </div>
     <div class="post-content">
       <p>{{postData.likes}}</p>
@@ -25,7 +25,8 @@ export default {
 
     },
     props : {
-       postData:Object
+       postData:Object,
+       filterName : String
     }
 }
 </script>
