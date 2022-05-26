@@ -2,6 +2,7 @@
 <div class="header">
     <ul class="header-button-left">
       <li>Cancel</li>
+      /
     </ul>
     <ul class="header-button-right">
       <li v-if="step==1" @click="step++;">Next</li>
