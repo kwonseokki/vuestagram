@@ -7,10 +7,10 @@
      
       <span class="profile-name">{{postData.name}}</span>
     </div>
-    <div :class="'post-body '+ postData.filter" :style="{background :`url(${postData.postImage}) center center`}">
+    <div @click="$store.commit('upLike')" :class="'post-body '+ postData.filter" :style="{background :`url(${postData.postImage}) center center`}">
     </div>
     <div class="post-content">
-      <p>{{postData.likes}}</p>
+      <p>{{$store.state.like}} Likes</p>
       <p><strong>{{postData.name}}</strong>{{postData.content}}</p>
       <p class="date">May 15</p>
     </div>
@@ -22,7 +22,9 @@
 export default {
     name : "DoPost",
     data() {
-
+      return {
+       
+      }
     },
     props : {
        postData:Object,

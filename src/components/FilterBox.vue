@@ -5,7 +5,6 @@
       <button @click="fire">버튼</button>
     </span>
     </div> 
-  
 </template>
 
 <script>

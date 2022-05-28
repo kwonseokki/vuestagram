@@ -2,7 +2,6 @@
 <div class="header">
     <ul class="header-button-left">
       <li>Cancel</li>
-      /
     </ul>
     <ul class="header-button-right">
       <li v-if="step==1" @click="step++;">Next</li>
@@ -12,8 +11,8 @@
   </div>
 
   <ContainerPost :postData="postData" :step="step" :url="url" @posting="getPosting" :filterName="filterName"/>
-<button @click="more">더보기</button>
-
+{{$store.state.more}}
+<button @click="$store.dispatch('getData')">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" accept="image/*" id="file" class="inputfile" />
@@ -38,7 +37,7 @@ export default {
       step : 0,
       url : "",
       content: "",
-      filterName : ""
+      filterName : "",
     }
   },
   mounted() {
