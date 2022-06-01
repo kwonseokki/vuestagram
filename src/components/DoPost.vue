@@ -7,7 +7,7 @@
      
       <span class="profile-name">{{postData.name}}</span>
     </div>
-    <div @click="$store.commit('upLike')" :class="'post-body '+ postData.filter" :style="{background :`url(${postData.postImage}) center center`}">
+    <div @click="upLike()" :class="'post-body '+ postData.filter" :style="{background :`url(${postData.postImage}) center center`}">
     </div>
     <div class="post-content">
       <p>{{$store.state.like}} Likes</p>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-
+import { mapMutations } from 'vuex';
 export default {
     name : "DoPost",
     data() {
@@ -29,6 +29,9 @@ export default {
     props : {
        postData:Object,
        filterName : String
+    },
+    methods : {
+      ...mapMutations(['upLike'])
     }
 }
 </script>

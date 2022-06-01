@@ -9,10 +9,11 @@
     </ul>
     <img src="./assets/logo.png" class="logo"/>
   </div>
-
+  <p>{{name}}{{age}}</p>
+  <p>{{내이름}}</p>
   <ContainerPost :postData="postData" :step="step" :url="url" @posting="getPosting" :filterName="filterName"/>
 {{$store.state.more}}
-<button @click="$store.dispatch('getData')">더보기</button>
+<button @click="getData()">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" accept="image/*" id="file" class="inputfile" />
@@ -26,6 +27,7 @@
 import ContainerPost from './components/ContainerPost.vue'
 import getPostDatas from './assets/data/postdata.js'
 import axios from 'axios'
+import { mapActions, mapState } from 'vuex'
 
 
 export default {
@@ -38,6 +40,7 @@ export default {
       url : "",
       content: "",
       filterName : "",
+      counter : 0
     }
   },
   mounted() {
@@ -77,8 +80,12 @@ export default {
     },
     getPosting : function(e){
       this.content = e;
-    }
-  
+    },
+   ...mapActions(['getData'])
+  },
+  computed : {
+    ...mapState(['name', 'age', 'like']), 
+    ...mapState({'내이름' : 'name'})
   }
 }
 </script>
