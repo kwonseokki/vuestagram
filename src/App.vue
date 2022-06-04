@@ -36,7 +36,7 @@ export default {
     return {
       postData : getPostDatas,
       num : 200,
-      step : 0,
+      step : 3,
       url : "",
       content: "",
       filterName : "",

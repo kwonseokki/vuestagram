@@ -22,11 +22,16 @@
     <textarea class="write-box" @input="posting"></textarea>
   </div>
 </div>
+
+<div v-if="step==3">
+<MyPage/>
+  </div>
 </template>
 
 <script>
 import DoPost from './DoPost.vue'
 import FilterBox from './FilterBox.vue'
+import MyPage from './MyPage.vue'
 export default {
     name : "ContainerPost",
     data (){
@@ -38,7 +43,8 @@ export default {
     },
     components : {
         DoPost,
-        FilterBox
+        FilterBox,
+        MyPage
     },
     props : {
       postData:Object,
